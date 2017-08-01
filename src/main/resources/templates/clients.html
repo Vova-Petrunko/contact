@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Client contacts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" th:href="@{/css/main.css}"
+          href="../../css/main.css" />
+
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Client Service</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#" th:href="@{/}">Home</a></li>
+                    <li class="active"><a href="#clients" th:href="@{/clients}">Clients</a></li>
+                    <li><a href="#new client" th:href="@{/client/new}">Create client</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div th:if="${not #lists.isEmpty(clients)}">
+            <h2>Clients List</h2>
+            <table class="table table-striped">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Skype</th>
+                    <th>View</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+                <tr th:each="client : ${clients}">
+                    <td th:text="${client.id}"><a href="/product/${product.id}">Id</a></td>
+                    <td th:text="${client.name}">client name</td>
+                    <td th:text="${'0'+client.phoneNumber}">phone number</td>
+                    <td th:text="${client.email}">email address</td>
+                    <td th:text="${client.skype}">skype address</td>
+                    <td><a th:href="${'/client/' + client.id}">View</a></td>
+                    <td><a th:href="${'/client/edit/' + client.id}">Edit</a></td>
+                    <td><a th:href="${'/client/delete/' + client.id}">Delete</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
